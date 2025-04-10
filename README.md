@@ -59,7 +59,9 @@ display_books() / display_members(): Viser overblik.
 run(): Hovedmenuen – herfra styres hele oplevelsen.
 
 Adgangskodebeskyttelse
+
 For at beskytte brugernes lånedata, kræves adgangskode ved låne/retur-handlinger. Hvis adgangskoden er forkert, stoppes processen, og brugeren får besked.
+
 
 Sådan foregår lån og returnering
 Lån af bøger:
