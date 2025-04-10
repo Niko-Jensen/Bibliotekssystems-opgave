@@ -1,113 +1,107 @@
+Hvad består systemet af?
+1. Book-klassen – Bøgerne i biblioteket
+Denne klasse repræsenterer en bog og holder styr på følgende:
 
-Bibliotekssystem i Python – README
+book_id: Et unikt ID for bogen.
 
-Dette projekt er et simpelt og interaktivt bibliotekssystem skrevet i Python. Det giver mulighed for at administrere bøger og medlemmer, og understøtter udlån og returnering af bøger via en tekstbaseret menu.
+title: Bogens titel.
 
+author: Forfatterens navn.
 
+copies: Hvor mange eksemplarer der er tilgængelige.
 
-Kodeoversigt
+Nyttige metoder:
 
-1. Book-klassen
-Repræsenterer en bog i biblioteket.
+display_info(): Viser info om bogen.
 
-- Attributter:
-  - book_id: Unikt numerisk ID for bogen.
-  - title: Bogens titel.
-  - author: Navn på forfatteren.
-  - copies: Antal tilgængelige eksemplarer.
+update_book(...): Giver mulighed for at opdatere titel, forfatter og antal kopier – du bestemmer selv hvilke felter.
 
-- Metoder:
-  - display_info(): Returnerer en streng med bogens oplysninger, f.eks. ID, titel og antal eksemplarer.
-  - update_book(title, author, copies): Bruges til at opdatere bogens oplysninger. Man kan vælge kun at ændre enkelte felter.
+2. Member-klassen – Brugere af biblioteket
+Denne klasse bruges til at repræsentere de personer, der låner bøger.
 
+member_id: Unikt ID.
 
+name: Navn på medlemmet.
 
-2. Member-klassen
-Repræsenterer et bibliotekets medlem.
+password: Bruges som adgangskode.
 
-- Attributter:
-  - member_id: Unikt numerisk ID.
-  - name: Medlemmets navn.
-  - password: Adgangskode til sikkerhedsverificering.
-  - borrowed_books: En liste over de bøger, medlemmet har lånt.
+borrowed_books: En liste over bøger, medlemmet har lånt.
 
-- Metoder:
-  - verify_password(): Anmoder brugeren om at indtaste adgangskoden og returnerer True eller False.
-  - display_info(): Viser medlemsdata og en liste over lånte bøger.
-  - borrow_books(books): Modtager en liste af bøger og forsøger at låne dem. Hvis eksemplarer ikke er tilgængelige, får brugeren besked.
-  - return_books(books): Modtager en liste af bøger og returnerer dem, hvis de findes i medlemmets låneliste.
+Vigtige metoder:
 
+verify_password(): Bruger bliver bedt om adgangskode.
 
-3. Library-klassen
-Håndterer den overordnede drift og organisering af bøger og medlemmer.
+display_info(): Viser medlem og deres lån.
 
-- Attributter:
-  - books: En liste over alle Book-objekter i systemet.
-  - members: En liste over alle Member-objekter.
+borrow_books(...): Forsøger at låne bøger (viser fejl hvis ingen eksemplarer er ledige).
 
-- Metoder:
-  - add_book(book): Tilføjer en bog til biblioteket.
-  - remove_book(book_id): Fjerner en bog ud fra dens ID.
-  - add_member(member): Tilføjer en ny bruger.
-  - remove_member(member_id): Fjerner et medlem baseret på ID.
-  - choose_action(member_id): Bruges til at låne eller returnere bøger efter adgangskodevalidering.
-  - issue_books(member): Gennemfører udlån efter brugerinput.
-  - return_books(member): Gennemfører returnering efter brugerinput.
-  - display_books(): Returnerer en liste med oplysninger om alle bøger.
-  - display_members(): Returnerer en liste med oplysninger om alle medlemmer.
-  - run(): Hovedloopet for programmet. Viser menu og styrer navigationen.
+return_books(...): Returnerer bøger, hvis de findes i lånelisten.
+
+3. Library-klassen – Systemets kerne
+Her sker al organiseringen – fra at holde styr på bøger og brugere til at håndtere udlån.
+
+books: Liste over alle bøger.
+
+members: Liste over alle medlemmer.
+
+Centrale metoder:
+
+add_book(...) / remove_book(...): Tilføj eller fjern bøger.
+
+add_member(...) / remove_member(...): Tilføj eller fjern brugere.
+
+choose_action(...): Start brugerhandlinger (efter adgangskode).
+
+issue_books(...) / return_books(...): Lån og returnering.
+
+display_books() / display_members(): Viser overblik.
+
+run(): Hovedmenuen – herfra styres hele oplevelsen.
 
 Adgangskodebeskyttelse
+For at beskytte brugernes lånedata, kræves adgangskode ved låne/retur-handlinger. Hvis adgangskoden er forkert, stoppes processen, og brugeren får besked.
 
-Når et medlem skal låne eller returnere bøger, skal vedkommende først indtaste sin adgangskode korrekt. Hvis adgangskoden er forkert, får brugeren besked, og handlingen bliver afbrudt. Dette sikrer, at kun rette personer kan ændre på deres lånestatus.
+Sådan foregår lån og returnering
+Lån af bøger:
 
+Systemet viser alle tilgængelige bøger.
 
-Hvordan foregår udlån og returnering?
+Brugeren indtaster ID'er eller titler på de bøger, de vil låne.
 
-- Når en bruger vælger at låne bøger:
-  - Der vises en liste over alle tilgængelige bøger.
-  - Brugeren indtaster ID'er eller titler på de bøger, de vil låne (komma-separeret).
-  - Systemet reducerer antallet af kopier, og tilføjer bogen til brugerens låneliste.
+Systemet opdaterer beholdningen og føjer bogen til brugerens liste.
 
-- Når en bruger vælger at returnere bøger:
-  - Der vises kun de bøger, som brugeren har lånt.
-  - Brugeren angiver hvilke de vil returnere.
-  - Systemet opdaterer beholdningen og fjerner bogen fra lånelisten.
+Returnering:
 
+Systemet viser kun de bøger, brugeren har lånt.
 
+Brugeren vælger hvilke, der skal returneres.
 
-Brugerinput og menu
+Lageret opdateres, og bogen fjernes fra lånelisten.
 
-Når programmet kører, mødes man med denne menu:
-
+Menu og brugerinput
+Når programmet kører, ser menuen sådan ud:
 
  Library Menu 
-1. Display all books
-2. Display all members
-3. Add a book
-4. Remove a book
-5. Add a member
-6. Remove a member
-7. Member actions (borrow/return)
-8. Exit
+1. Vis alle bøger
+2. Vis alle medlemmer
+3. Tilføj en bog
+4. Fjern en bog
+5. Tilføj et medlem
+6. Fjern et medlem
+7. Medlemsfunktioner (lån/retur)
+8. Afslut
+Alle valg foretages ved at indtaste et tal fra 1 til 8.
 
-
-Alle valg foretages via indtastning af tal (1-8).
-
-Eksempel på tilføjelse af bog:
+Eksempel: Tilføj en bog
 
 Enter book ID: 4
 Enter title: Artificial Intelligence
 Enter author: Alan Turing
 Enter number of copies: 2
 
-
-
-
 Fejlhåndtering
+Hvis du taster noget forkert (f.eks. bogstaver i stedet for tal), bliver det fanget med try/except.
 
-- Fejlagtig indtastning (f.eks. bogstaver i stedet for tal) bliver fanget af try/except.
-- Hvis en bog eller et medlem ikke findes, informeres brugeren om dette.
-- Brugeren får altid mulighed for at prøve igen, indtil gyldigt input gives.
+Systemet giver besked, hvis en bog eller et medlem ikke findes.
 
-
+Brugeren får altid mulighed for at prøve igen, indtil der er indtastet noget gyldigt.
