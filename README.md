@@ -3,7 +3,7 @@ Bibliotekssystem i Python – README
 
 Dette projekt er et simpelt og interaktivt bibliotekssystem skrevet i Python. Det giver mulighed for at administrere bøger og medlemmer, og understøtter udlån og returnering af bøger via en tekstbaseret menu.
 
----
+
 
 Kodeoversigt
 
@@ -20,7 +20,7 @@ Repræsenterer en bog i biblioteket.
   - display_info(): Returnerer en streng med bogens oplysninger, f.eks. ID, titel og antal eksemplarer.
   - update_book(title, author, copies): Bruges til at opdatere bogens oplysninger. Man kan vælge kun at ændre enkelte felter.
 
----
+
 
 2. Member-klassen
 Repræsenterer et bibliotekets medlem.
@@ -37,7 +37,6 @@ Repræsenterer et bibliotekets medlem.
   - borrow_books(books): Modtager en liste af bøger og forsøger at låne dem. Hvis eksemplarer ikke er tilgængelige, får brugeren besked.
   - return_books(books): Modtager en liste af bøger og returnerer dem, hvis de findes i medlemmets låneliste.
 
----
 
 3. Library-klassen
 Håndterer den overordnede drift og organisering af bøger og medlemmer.
@@ -58,13 +57,10 @@ Håndterer den overordnede drift og organisering af bøger og medlemmer.
   - display_members(): Returnerer en liste med oplysninger om alle medlemmer.
   - run(): Hovedloopet for programmet. Viser menu og styrer navigationen.
 
----
-
 Adgangskodebeskyttelse
 
 Når et medlem skal låne eller returnere bøger, skal vedkommende først indtaste sin adgangskode korrekt. Hvis adgangskoden er forkert, får brugeren besked, og handlingen bliver afbrudt. Dette sikrer, at kun rette personer kan ændre på deres lånestatus.
 
----
 
 Hvordan foregår udlån og returnering?
 
@@ -78,14 +74,14 @@ Hvordan foregår udlån og returnering?
   - Brugeren angiver hvilke de vil returnere.
   - Systemet opdaterer beholdningen og fjerner bogen fra lånelisten.
 
----
+
 
 Brugerinput og menu
 
 Når programmet kører, mødes man med denne menu:
 
 
---- Library Menu ---
+ Library Menu 
 1. Display all books
 2. Display all members
 3. Add a book
@@ -106,7 +102,7 @@ Enter author: Alan Turing
 Enter number of copies: 2
 
 
----
+
 
 Fejlhåndtering
 
@@ -114,4 +110,4 @@ Fejlhåndtering
 - Hvis en bog eller et medlem ikke findes, informeres brugeren om dette.
 - Brugeren får altid mulighed for at prøve igen, indtil gyldigt input gives.
 
----
+
