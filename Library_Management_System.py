@@ -80,7 +80,7 @@ class Member:
 
     def return_books(self, books):
         """
-        Return borrowed books. Increases book copies by one for each returned book.
+        Return borrowed books. Increase book copies by one for each returned book.
         """
         returned = []    # Liste over bøger der blev afleveret
         not_found = []   # Liste over bøger der ikke var lånt
@@ -102,7 +102,7 @@ class Member:
 
 class Library:
     """
-    Manages the collection of books and members, and handles borrowing/returning.
+    Manages the collection of books and members and handles borrowing/returning.
     """
 
     def __init__(self):
