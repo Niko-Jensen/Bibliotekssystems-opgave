@@ -1,0 +1,32 @@
+import unittest
+from library import Book, Member
+
+class TestLibraryFunctions(unittest.TestCase):
+    def setUp(self):
+        self.book1 = Book(1, "Test Book", "Author", 2)
+        self.member = Member(1, "Test User", "pass123")
+
+    def test_borrow_book(self):
+        message = self.member.borrow([self.book1])
+        self.assertIn("You borrowed", message)
+        self.assertEqual(self.book1.copies, 1)
+        self.assertIn(self.book1, self.member.borrowed_books)
+
+    def test_return_book(self):
+        self.member.borrow([self.book1])
+        message = self.member.return_books([self.book1])
+        self.assertIn("You returned", message)
+        self.assertEqual(self.book1.copies, 2)
+        self.assertNotIn(self.book1, self.member.borrowed_books)
+
+    def test_borrow_unavailable_book(self):
+        self.book1.copies = 0
+        message = self.member.borrow([self.book1])
+        self.assertIn("not available", message)
+
+    def test_return_book_not_borrowed(self):
+        message = self.member.return_books([self.book1])
+        self.assertIn("weren’t in your borrowed list", message)
+
+if __name__ == '__main__':
+    unittest.main()
