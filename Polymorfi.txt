@@ -1,10 +1,9 @@
-Hvad er polymorfi?
-Polymorfi (fra græsk: "mange former") er et grundlæggende princip i objektorienteret programmering, der betyder, at samme metode eller funktion kan udføres forskelligt afhængigt af objektets type.
+Polymorfi er et grundlæggende princip i objektorienteret programmering, der betyder, at samme metode eller funktion kan udføres forskelligt afhængigt af objektets type.
 
 I praksis betyder det, at vi kan kalde den samme metode (f.eks. display_info()), og selvom objekterne er forskellige (en bog, et magasin, en dvd), vil det rigtige resultat stadig blive vist.
 
 Polymorfi i dit bibliotekssystem
-I dit projekt kan vi skabe polymorfi ved at:
+I dette projekt kan vi skabe polymorfi ved at:
 
 Lave en fælles superklasse – fx LibraryItem, som både Book, Magazine, og evt. DVD arver fra.
 
