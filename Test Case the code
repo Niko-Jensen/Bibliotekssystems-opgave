@@ -1,32 +1,92 @@
 import unittest
-from library import Book, Member
+from models import Book, Magazine, Member, Library
 
-class TestLibraryFunctions(unittest.TestCase):
+class TestLibrarySystem(unittest.TestCase):
+
     def setUp(self):
-        self.book1 = Book(1, "Test Book", "Author", 2)
-        self.member = Member(1, "Test User", "pass123")
+        # Initial setup before each test
+        self.book = Book(1, "Python", "Guido", 2)
+        self.magazine = Magazine(2, "TechWorld", 8)
+        self.member = Member(101, "Sara", "pass123")
+        self.library = Library()
 
-    def test_borrow_book(self):
-        message = self.member.borrow([self.book1])
-        self.assertIn("You borrowed", message)
-        self.assertEqual(self.book1.copies, 1)
-        self.assertIn(self.book1, self.member.borrowed_books)
+        self.library.add_item(self.book)
+        self.library.add_item(self.magazine)
+        self.library.add_member(self.member)
 
-    def test_return_book(self):
-        self.member.borrow([self.book1])
-        message = self.member.return_books([self.book1])
-        self.assertIn("You returned", message)
-        self.assertEqual(self.book1.copies, 2)
-        self.assertNotIn(self.book1, self.member.borrowed_books)
+    def test_add_item(self):
+        new_book = Book(3, "AI", "Turing", 1)
+        result = self.library.add_item(new_book)
+        self.assertIn(new_book, self.library.items)
 
-    def test_borrow_unavailable_book(self):
-        self.book1.copies = 0
-        message = self.member.borrow([self.book1])
-        self.assertIn("not available", message)
+    def test_remove_item(self):
+        result = self.library.remove_item(1)
+        self.assertNotIn(self.book, self.library.items)
+        self.assertEqual(result, "Item removed.")
+
+    def test_remove_nonexistent_item(self):
+        result = self.library.remove_item(999)
+        self.assertEqual(result, "Item not found.")
+
+    def test_add_member(self):
+        new_member = Member(202, "Jonas", "xyz")
+        result = self.library.add_member(new_member)
+        self.assertIn(new_member, self.library.members)
+
+    def test_remove_member(self):
+        result = self.library.remove_member(101)
+        self.assertNotIn(self.member, self.library.members)
+        self.assertEqual(result, "Member removed.")
+
+    def test_remove_nonexistent_member(self):
+        result = self.library.remove_member(404)
+        self.assertEqual(result, "Member not found.")
+
+    def test_borrow_book_success(self):
+        self.member.borrow_items([self.book])
+        self.assertEqual(len(self.member.borrowed_items), 1)
+        self.assertEqual(self.book.copies, 1)
+
+    def test_borrow_book_not_available(self):
+        self.book.copies = 0
+        msg = self.member.borrow_items([self.book])
+        self.assertIn("not available", msg)
+        self.assertEqual(len(self.member.borrowed_items), 0)
+
+    def test_return_book_success(self):
+        self.member.borrow_items([self.book])
+        msg = self.member.return_items([self.book])
+        self.assertIn("returned", msg)
+        self.assertEqual(self.book.copies, 2)
+        self.assertNotIn(self.book, self.member.borrowed_items)
 
     def test_return_book_not_borrowed(self):
-        message = self.member.return_books([self.book1])
-        self.assertIn("weren’t in your borrowed list", message)
+        msg = self.member.return_items([self.book])
+        self.assertIn("not found", msg)
 
-if __name__ == '__main__':
+    def test_borrow_magazine(self):
+        msg = self.member.borrow_items([self.magazine])
+        self.assertIn(self.magazine, self.member.borrowed_items)
+
+    def test_return_magazine(self):
+        self.member.borrow_items([self.magazine])
+        self.member.return_items([self.magazine])
+        self.assertNotIn(self.magazine, self.member.borrowed_items)
+
+    def test_display_info_polymorphism(self):
+        self.assertTrue("Book" in self.book.display_info())
+        self.assertTrue("Magazine" in self.magazine.display_info())
+
+    def test_display_members(self):
+        result = self.library.display_members()
+        self.assertEqual(len(result), 1)
+        self.assertIn("Sara", result[0])
+
+    def test_display_items(self):
+        result = self.library.display_items()
+        self.assertEqual(len(result), 2)
+        self.assertIn("Python", result[0])
+        self.assertIn("TechWorld", result[1])
+
+if __name__ == "__main__":
     unittest.main()
