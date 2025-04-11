@@ -1,0 +1,42 @@
+Hvad er polymorfi?
+Polymorfi (fra græsk: "mange former") er et grundlæggende princip i objektorienteret programmering, der betyder, at samme metode eller funktion kan udføres forskelligt afhængigt af objektets type.
+
+I praksis betyder det, at vi kan kalde den samme metode (f.eks. display_info()), og selvom objekterne er forskellige (en bog, et magasin, en dvd), vil det rigtige resultat stadig blive vist.
+
+Polymorfi i dit bibliotekssystem
+I dit projekt kan vi skabe polymorfi ved at:
+
+Lave en fælles superklasse – fx LibraryItem, som både Book, Magazine, og evt. DVD arver fra.
+
+Bruge en fælles metode – f.eks. display_info() – som implementeres forskelligt afhængigt af typen.
+
+Gem alle elementer i en liste – fx library.items – og kalde display_info() polymorft på dem alle.
+
+Eksemple:
+
+En fælles metode for alle typer materialer:
+------------------------------------------------------------------------------------------------
+class LibraryItem:
+    def __init__(self, item_id, title):
+        self.item_id = item_id
+        self.title = title
+
+    def display_info(self):
+        raise NotImplementedError("Subclasses must implement this method")
+------------------------------------------------------------------------------------------------
+class Book(LibraryItem):
+    def __init__(self, item_id, title, author, copies):
+        super().__init__(item_id, title)
+        self.author = author
+        self.copies = copies
+
+    def display_info(self):
+        return f"[Bog] {self.title} af {self.author} ({self.copies} eksemplarer)"
+------------------------------------------------------------------------------------------------
+class Magazine(LibraryItem):
+    def __init__(self, item_id, title, issue):
+        super().__init__(item_id, title)
+        self.issue = issue
+
+    def display_info(self):
+        return f"[Magasin] {self.title} – Udgave #{self.issue}"
