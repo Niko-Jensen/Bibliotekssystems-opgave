@@ -1,5 +1,8 @@
 Hvad består systemet af?
+
 1. Book-klassen – Bøgerne i biblioteket
+
+   
 Denne klasse repræsenterer en bog og holder styr på følgende:
 
 book_id: Et unikt ID for bogen.
@@ -16,8 +19,11 @@ display_info(): Viser info om bogen.
 
 update_book(...): Giver mulighed for at opdatere titel, forfatter og antal kopier – du bestemmer selv hvilke felter.
 
+
 2. Member-klassen – Brugere af biblioteket
 Denne klasse bruges til at repræsentere de personer, der låner bøger.
+
+
 
 member_id: Unikt ID.
 
@@ -26,6 +32,7 @@ name: Navn på medlemmet.
 password: Bruges som adgangskode.
 
 borrowed_books: En liste over bøger, medlemmet har lånt.
+
 
 Vigtige metoder:
 
@@ -36,6 +43,8 @@ display_info(): Viser medlem og deres lån.
 borrow_books(...): Forsøger at låne bøger (viser fejl hvis ingen eksemplarer er ledige).
 
 return_books(...): Returnerer bøger, hvis de findes i lånelisten.
+
+
 
 3. Library-klassen – Systemets kerne
 Her sker al organiseringen – fra at holde styr på bøger og brugere til at håndtere udlån.
@@ -58,6 +67,7 @@ display_books() / display_members(): Viser overblik.
 
 run(): Hovedmenuen – herfra styres hele oplevelsen.
 
+
 Adgangskodebeskyttelse
 
 For at beskytte brugernes lånedata, kræves adgangskode ved låne/retur-handlinger. Hvis adgangskoden er forkert, stoppes processen, og brugeren får besked.
@@ -71,6 +81,7 @@ Systemet viser alle tilgængelige bøger.
 Brugeren indtaster ID'er eller titler på de bøger, de vil låne.
 
 Systemet opdaterer beholdningen og føjer bogen til brugerens liste.
+
 
 Returnering:
 
@@ -100,6 +111,7 @@ Enter book ID: 4
 Enter title: Artificial Intelligence
 Enter author: Alan Turing
 Enter number of copies: 2
+
 
 Fejlhåndtering
 Hvis du taster noget forkert (f.eks. bogstaver i stedet for tal), bliver det fanget med try/except.
