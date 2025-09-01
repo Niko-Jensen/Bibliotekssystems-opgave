@@ -17,6 +17,8 @@ display_info(): Displays information about the book.
 
 update_book(...): Allows updating the title, author, and number of copies – you decide which fields to change.
 
+
+
 Member Class – Library users
 
 This class is used to represent the people who borrow books.
@@ -38,6 +40,8 @@ display_info(): Displays the member and their borrowed books.
 borrow_books(...): Attempts to borrow books (shows an error if no copies are available).
 
 return_books(...): Returns books if they are found in the borrowed list.
+
+
 
 Library Class – The core of the system
 
@@ -61,9 +65,12 @@ display_books() / display_members(): Shows an overview.
 
 run(): The main menu – controls the entire experience.
 
+
 Password Protection
 
 To protect users’ borrowing data, a password is required for borrowing/return actions. If the password is incorrect, the process stops and the user is notified.
+
+
 
 How borrowing and returning works
 
@@ -82,6 +89,8 @@ The system only shows the books the user has borrowed.
 The user selects which ones to return.
 
 The inventory is updated and the books are removed from the borrowed list.
+
+
 
 Menu and User Input
 
@@ -119,5 +128,6 @@ Error Handling
 If you type something invalid (e.g., letters instead of numbers), it will be caught using try/except.
 
 The system notifies you if a book or member does not exist.
+
 
 The user can always try again until valid input is provided.
